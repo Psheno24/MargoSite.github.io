@@ -29,35 +29,116 @@
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
 
-  /* Моб. герой: --hero-viewport-h и явная высота .hero в px (окно минус .site-header).
-     В Яндекс.Браузере при скрытии панели visualViewport.resize — пересчитываем полосу
-     и берём высоту из visualViewport; иначе фикс. высота + смена отступов = ужимание фото. */
+  /* Моб. герой: один снимок при полной загрузке страницы (viewport + размеры контента в px).
+     Без пересчёта при скрытии панели браузера / resize / смене ориентации. При уходе с
+     мобильного брейкпоинта снимок сбрасывается. */
   var heroViewportMql = window.matchMedia("(max-width: 899px)");
-  var heroYandexChromium =
-    /YaBrowser|YandexBrowser/i.test(navigator.userAgent || "");
-  function syncHeroViewportHeight() {
-    var hero = document.querySelector(".hero");
-    if (!heroViewportMql.matches) {
-      document.documentElement.style.removeProperty("--hero-viewport-h");
-      if (hero) {
-        hero.style.minHeight = "";
-        hero.style.height = "";
-      }
+  var heroSnapshotApplied = false;
+  var heroSnapshotStarted = false;
+
+  function lockHeroSnapshotStyles(hero) {
+    function lock(el, propNames) {
+      if (!el) return;
+      var cs = getComputedStyle(el);
+      propNames.forEach(function (name) {
+        el.style.setProperty(name, cs.getPropertyValue(name));
+      });
+    }
+    lock(hero, ["padding-top", "padding-left", "padding-right"]);
+    lock(hero.querySelector(".hero__title"), [
+      "font-size",
+      "margin-bottom",
+      "line-height",
+    ]);
+    lock(hero.querySelector(".hero__lead"), [
+      "font-size",
+      "margin-bottom",
+      "line-height",
+    ]);
+    lock(hero.querySelector(".hero__grid"), ["gap", "row-gap", "column-gap"]);
+    lock(hero.querySelector(".hero__middle"), ["padding-top", "padding-bottom"]);
+    lock(hero.querySelector(".hero__visual"), ["max-width"]);
+    lock(hero.querySelector(".hero__img"), [
+      "max-width",
+      "max-height",
+      "width",
+      "height",
+    ]);
+    lock(hero.querySelector(".hero__actions--mobile"), [
+      "gap",
+      "padding-top",
+      "padding-bottom",
+    ]);
+    $all(".hero__actions--mobile .btn", hero).forEach(function (btn) {
+      lock(btn, [
+        "font-size",
+        "line-height",
+        "padding-top",
+        "padding-right",
+        "padding-bottom",
+        "padding-left",
+      ]);
+    });
+  }
+
+  function clearHeroSnapshotStyles(hero) {
+    function clear(el, propNames) {
+      if (!el) return;
+      propNames.forEach(function (name) {
+        el.style.removeProperty(name);
+      });
+    }
+    clear(hero, ["padding-top", "padding-left", "padding-right"]);
+    clear(hero.querySelector(".hero__title"), [
+      "font-size",
+      "margin-bottom",
+      "line-height",
+    ]);
+    clear(hero.querySelector(".hero__lead"), [
+      "font-size",
+      "margin-bottom",
+      "line-height",
+    ]);
+    clear(hero.querySelector(".hero__grid"), ["gap", "row-gap", "column-gap"]);
+    clear(hero.querySelector(".hero__middle"), ["padding-top", "padding-bottom"]);
+    clear(hero.querySelector(".hero__visual"), ["max-width"]);
+    clear(hero.querySelector(".hero__img"), [
+      "max-width",
+      "max-height",
+      "width",
+      "height",
+    ]);
+    clear(hero.querySelector(".hero__actions--mobile"), [
+      "gap",
+      "padding-top",
+      "padding-bottom",
+    ]);
+    $all(".hero__actions--mobile .btn", hero).forEach(function (btn) {
+      clear(btn, [
+        "font-size",
+        "line-height",
+        "padding-top",
+        "padding-right",
+        "padding-bottom",
+        "padding-left",
+      ]);
+    });
+  }
+
+  function applyHeroInitialSnapshot() {
+    if (heroSnapshotStarted || heroSnapshotApplied || !heroViewportMql.matches) {
       return;
     }
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+
+    heroSnapshotStarted = true;
+
     var innerH = window.innerHeight;
-    if (
-      heroYandexChromium &&
-      window.visualViewport &&
-      typeof window.visualViewport.height === "number"
-    ) {
-      innerH = Math.round(window.visualViewport.height);
-    }
     document.documentElement.style.setProperty(
       "--hero-viewport-h",
       innerH + "px"
     );
-    if (!hero) return;
     var header = document.querySelector(".site-header");
     var hh = header ? Math.round(header.getBoundingClientRect().height) : 0;
     if (!hh) {
@@ -66,25 +147,49 @@
     var band = Math.max(0, Math.round(innerH) - hh);
     hero.style.minHeight = band + "px";
     hero.style.height = band + "px";
-  }
-  syncHeroViewportHeight();
-  if (heroViewportMql.addEventListener) {
-    heroViewportMql.addEventListener("change", syncHeroViewportHeight);
-  } else if (heroViewportMql.addListener) {
-    heroViewportMql.addListener(syncHeroViewportHeight);
-  }
-  window.addEventListener("orientationchange", function () {
-    window.setTimeout(syncHeroViewportHeight, 200);
-  });
 
-  var heroResizeTimer;
-  function scheduleHeroViewportSync() {
-    clearTimeout(heroResizeTimer);
-    heroResizeTimer = setTimeout(syncHeroViewportHeight, 120);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (!heroViewportMql.matches) {
+          heroSnapshotStarted = false;
+          return;
+        }
+        lockHeroSnapshotStyles(hero);
+        heroSnapshotApplied = true;
+      });
+    });
   }
-  if (heroYandexChromium && window.visualViewport) {
-    window.visualViewport.addEventListener("resize", scheduleHeroViewportSync);
-    window.addEventListener("resize", scheduleHeroViewportSync);
+
+  function onHeroViewportMqlChange() {
+    if (!heroViewportMql.matches) {
+      document.documentElement.style.removeProperty("--hero-viewport-h");
+      var hero = document.querySelector(".hero");
+      if (hero) {
+        hero.style.minHeight = "";
+        hero.style.height = "";
+        if (heroSnapshotApplied) {
+          clearHeroSnapshotStyles(hero);
+        }
+      }
+      heroSnapshotApplied = false;
+      heroSnapshotStarted = false;
+    }
+  }
+
+  function scheduleHeroSnapshotOnLoad() {
+    if (!heroViewportMql.matches) return;
+    if (document.readyState === "complete") {
+      applyHeroInitialSnapshot();
+    } else {
+      window.addEventListener("load", applyHeroInitialSnapshot);
+    }
+  }
+  scheduleHeroSnapshotOnLoad();
+
+  if (heroViewportMql.addEventListener) {
+    heroViewportMql.addEventListener("change", onHeroViewportMqlChange);
+  } else if (heroViewportMql.addListener) {
+    heroViewportMql.addListener(onHeroViewportMqlChange);
   }
 
   /* ---------- Тарифы: подсветка выбранной карточки ---------- */
