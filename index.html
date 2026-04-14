@@ -1,591 +1,808 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Margarita Volkova, english teacher</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <meta
+      name="description"
+      content="Маргарита Волкова — преподаватель английского языка. Индивидуальные и групповые онлайн-занятия для детей и взрослых, подготовка к экзаменам."
+    />
+    <title>Маргарита Волкова — преподаватель английского языка</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap&subset=cyrillic"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap&subset=cyrillic"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="assets/css/main.css" />
   </head>
-
   <body>
-    <header>
-      <nav>
-        <div class="navbar">
-          <div class="nav-container">
-            <input class="checkbox" type="checkbox" name="" id="" />
-            <div class="hamburger-lines">
-              <span class="line line1"></span>
-              <span class="line line2"></span>
-              <span class="line line3"></span>
-            </div>
-            <div class="menu-items">
-              <div class="menu-items_top">
-                <li><a href="#marathon">Рождественский марафон</a></li>
-                <li><a href="#prices">Тарифы</a></li>
-                <li><a href="#aboutMe">Обо мне</a></li>
-                <li><a href="#contacts">Контакты</a></li>
-              </div>
-              <div class="buttonContainer">
-                <button id="openFormMenu" class="open-form">
-                  Оставить заявку
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <nav class="navigation">
-        <ul class="menu">
-          <li><a href="#marathon">Рождественский марафон</a></li>
-          <li><a href="#prices">Тарифы</a></li>
-          <li><a href="#aboutMe">Обо мне</a></li>
-          <li><a href="#contacts">Контакты</a></li>
-        </ul>
-      </nav>
-      <div class="container">
-        <div class="mainInfo">
-          <h1 class="mainName">Margarita Volkova</h1>
-          <p class="mainDesription">
-            Преподаватель английского языка<br />@maggvlk |
-            mvikhareva@icloud.com
-          </p>
-        </div>
-        <div class="socialMedia">
-          <ul class="socialMedia_ul">
-            <li>
-              <a class="socialMedia_a" href="https://t.me/maggvlk" target="_blank"
-                ><img src="img/telegram.svg" alt=""
-              /></a>
-            </li>
-            <li>
-              <a class="socialMedia_a" href="https://wa.me/79537444988" target="_blank"
-                ><img src="img/whatsapp.svg" alt=""
-              /></a>
-            </li>
-            <li>
-              <a
-                class="socialMedia_a"
-                href="https://www.instagram.com/maggvlk/"
-                target="_blank"
-                ><img src="img/insta.svg" alt=""
-              /></a>
-            </li>
-          </ul>
-        </div>
+    <div id="top" class="top-anchor" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-logo" href="#top">
+          Маргарита Волкова
+          <small>Английский язык · онлайн</small>
+        </a>
+        <nav class="nav-desktop" aria-label="Основная навигация">
+          <a href="#about">Обо мне</a>
+          <a href="#services">Услуги</a>
+          <a href="#lesson">Урок</a>
+          <a href="#pricing">Тарифы</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#education">Образование</a>
+          <a href="#faq">Вопросы</a>
+          <a href="#contacts">Контакты</a>
+          <button type="button" class="btn btn--primary js-open-modal">
+            Записаться
+          </button>
+        </nav>
+        <button
+          type="button"
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-mobile"
+          aria-label="Открыть меню"
+        >
+          <span class="nav-toggle__inner" aria-hidden="true">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </span>
+        </button>
       </div>
     </header>
 
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Мобильное меню">
+      <a href="#about">Обо мне</a>
+      <a href="#services">Услуги</a>
+      <a href="#lesson">Как проходит урок</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#education">Образование</a>
+      <a href="#faq">Вопросы и ответы</a>
+      <a href="#contacts">Контакты</a>
+      <button type="button" class="btn btn--primary js-open-modal">
+        Записаться на урок
+      </button>
+    </nav>
+
     <main>
-      <div class="floating-button" id="openFormButton">
-        <img src="img/christmastree.png" class="icon" />
-        <span class="text">Оставить заявку</span>
-      </div>
-      <div class="pictures">
-        <div class="carousel">
-          <div class="carousel__wrapper">
-            <div class="carousel__slide">
-              <img src="img/firstMain.jpg" alt="Photo 1" />
-              <img src="img/secondMain.jpg" alt="Photo 2" />
-              <img src="img/thirdMain.jpeg" alt="Photo 3" />
-            </div>
-            <div class="carousel__slide">
-              <img src="img/fourthMain.jpg" alt="Photo 4" />
-              <img src="img/fivethMain.jpg" alt="Photo 5" />
-              <img src="img/sixthMain.jpg" alt="Photo 6" />
-            </div>
-          </div>
-          <button class="carousel__prev">‹</button>
-          <button class="carousel__next">›</button>
-        </div>
-
-        <div class="secondCarousel">
-          <svg
-            class="svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 320 300"
-            height="42"
-            width="42"
-          >
-            <!-- Прямоугольники -->
-            <rect
-              class="tooltip-horizontal-scroll-icon_card"
-              x="480"
-              width="200"
-              height="200"
-              rx="5"
-              fill="rgba(255,255,255,0.2)"
-            ></rect>
-            <rect
-              class="tooltip-horizontal-scroll-icon_card"
-              y="0"
-              width="200"
-              height="200"
-              rx="5"
-              fill="rgba(255,255,255,0.2)"
-            ></rect>
-            <rect
-              class="tooltip-horizontal-scroll-icon_card"
-              x="240"
-              width="200"
-              height="200"
-              rx="5"
-              fill="rgba(255,255,255,0.2)"
-            ></rect>
-
-            <!-- Путь с анимацией -->
-            <path
-              class="tooltip-horizontal-scroll-icon_hand"
-              d="M78.9579 285.7C78.9579 285.7 37.8579 212.5 20.5579 180.8C-2.44209 138.6 -6.2422 120.8 9.6579 112C19.5579 106.5 33.2579 108.8 41.6579 123.4L61.2579 154.6V32.3C61.2579 32.3 60.0579 0 83.0579 0C107.558 0 105.458 32.3 105.458 32.3V91.7C105.458 91.7 118.358 82.4 133.458 86.6C141.158 88.7 150.158 92.4 154.958 104.6C154.958 104.6 185.658 89.7 200.958 121.4C200.958 121.4 236.358 114.4 236.358 151.1C236.358 187.8 192.158 285.7 192.158 285.7H78.9579Z"
-              fill="rgba(255,255,255,1)"
-            ></path>
-          </svg>
-          <div class="secondCarousel__wrapper">
-            <div class="secondCarousel__slide">
-              <img src="img/firstMain.jpg" alt="Photo 1" />
-            </div>
-            <div class="secondCarousel__slide">
-              <img src="img/secondMain.jpg" alt="Photo 4" />
-            </div>
-            <div class="secondCarousel__slide">
-              <img src="img/thirdMain.jpeg" alt="Photo 4" />
-            </div>
-            <div class="secondCarousel__slide">
-              <img src="img/fourthMain.jpg" alt="Photo 4" />
-            </div>
-            <div class="secondCarousel__slide">
-              <img src="img/fivethMain.jpg" alt="Photo 4" />
-            </div>
-            <div class="secondCarousel__slide">
-              <img src="img/sixthMain.jpg" alt="Photo 4" />
-            </div>
-          </div>
-          <button class="secondCarousel__prev">‹</button>
-          <button class="secondCarousel__next">›</button>
-        </div>
-      </div>
-      <div class="christmasMarathon container" id="marathon">
-        <div class="christmasMarathon_title">
-          <div class="christmasMarathon_title_L">
-            <h1>Christmas<br />Marathon</h1>
-            <p>🎁 Взрослый + Детский тарифы = скидка 10%!</p>
-          </div>
-          <div class="christmasMarathon_title_R">
-            <p>
-              Читай <span class="textItalic">The Christmas Pig</span> Дж. К.
-              Роулинг в оригинале, слушай культовые рождественские песни и
-              смотри самые любимые фильмы и сериалы на английском! <br />
-              <br />
-              <span class="textBold">Для детей и взрослых:</span>
-              🦌 Взрослые:
-              <span class="textItalic"
-                >Love Actually, Friends,
-                <span class="no-wrap">Last Christmas.</span></span
-              >
-              <br />
-              🦌 Дети: <span class="textItalic">Home Alone</span>,
-              <span class="no-wrap textItalic">The Grinch,</span>
-              <span class="textItalic no-wrap">Jingle Bells</span>. <br />
-              <br />
-              Выбирай свой формат: с поддержкой наставника или самостоятельно.
-              Окунитесь в атмосферу праздника, улучшая свой английский.
-            </p>
-          </div>
-        </div>
-        <div class="laptopContainer">
-          <div class="laptop">
-            <div class="laptop-block"></div>
-            <div class="laptop-top">
-              <div></div>
-              <div id="imageContainer">
-                <img src="img/screen.png" class="active" alt="Screen 1" />
-                <img src="img/screen2.png" alt="Screen 2" />
-                <img src="img/screen3.png" alt="Screen 3" />
-                <img src="img/screen4.png" alt="Screen 4" />
+      <section class="hero">
+        <div class="container hero__wrap">
+          <div class="hero__grid">
+            <div class="hero__intro">
+              <h1 class="hero__title">
+                Уроки английского языка с заботой и пониманием
+              </h1>
+              <p class="hero__lead">
+                Поддерживаю и направляю — от первых шагов изучения до уверенного
+                владения языком. Индивидуальный подход, забота и онлайн-формат,
+                который подстраивается под вас.
+              </p>
+              <div class="hero__actions hero__actions--desktop">
+                <button type="button" class="btn btn--primary js-open-modal">
+                  Записаться на урок
+                </button>
+                <a class="btn btn--ghost" href="#about">Узнать обо мне</a>
               </div>
             </div>
-            <div class="laptop-bottom">
-              <div>
-                <div></div>
+            <div class="hero__middle">
+              <div class="hero__visual">
+                <img
+                  class="hero__img"
+                  src="assets/images/Margo.jpg"
+                  width="640"
+                  height="800"
+                  alt="Маргарита Волкова, преподаватель английского языка"
+                />
               </div>
-              <div></div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="prices" id="prices">
-        <div class="backPrices">
-          <h1>Тарифы для взрослых</h1>
-        </div>
-        <div class="prices_cards container">
-          <div class="card">
-            <img src="img/1сard.png" alt="" />
-            <h2>САМ СЕБЕ СНЕГОВИК</h2>
-            <p class="pTextDescription">
-              Самостоятельное прохождение марафона на платформе ProgressMe
-              <span class="textBold">БЕЗ</span> проверки. Минимальный уровень
-              языка, при котором будет комфортно проходить марафон - A2
-            </p>
-            <p class="price">Стоимость: 1990₽</p>
-          </div>
-          <div class="card">
-            <img src="img/2card.png" alt="" />
-            <h2>ВМЕСТЕ С ЭЛЬФАМИ</h2>
-            <p class="pTextDescription">
-              Самостоятельное прохождение марафона на платформе ProgressMe
-              <span class="textBold">С</span> проверкой от меня. Минимальный
-              уровень языка, при котором будет комфортно проходить марафон - A2
-            </p>
-            <p class="price">Стоимость: 2990₽</p>
-          </div>
-          <div class="card">
-            <img src="img/3card.png" alt="" />
-            <h2>ПРЕПОДАВАТЕЛЬ</h2>
-            <p class="pTextDescription">
-              Предоставляется доступ к материалам на платформе ProgressMe. Вы
-              добавляете их к себе и можете задавать своим студентам
-              неограниченное количество раз.
-            </p>
-            <p class="price">Стоимость: 3990₽</p>
+          <div class="hero__actions hero__actions--mobile">
+            <button type="button" class="btn btn--primary js-open-modal">
+              Записаться на урок
+            </button>
+            <a class="btn btn--ghost" href="#about">Узнать обо мне</a>
           </div>
         </div>
-        <div class="backPrices">
-          <h1>Тарифы для детей</h1>
-        </div>
-        <div class="prices_cards container">
-          <div class="card">
-            <img src="img/4card.png" alt="" />
-            <h2>СНЕЖНЫЙ КВЕСТ</h2>
-            <p class="pTextDescription">
-              Самостоятельное прохождение марафона на платформе ProgressMe
-              <span class="textBold">БЕЗ</span> проверки. Минимальный уровень
-              языка, при котором будет комфортно проходить марафон - A2
-            </p>
-            <p class="price">Стоимость: 1990₽</p>
-          </div>
-          <div class="card">
-            <img src="img/5card.png" alt="" />
-            <h2>ПОД КРЫЛОМ САНТЫ</h2>
-            <p class="pTextDescription">
-              Самостоятельное прохождение марафона на платформе ProgressMe
-              <span class="textBold">С</span> проверкой от меня. Минимальный
-              уровень языка, при котором будет комфортно проходить марафон - A2
-            </p>
-            <p class="price">Стоимость: 2990₽</p>
-          </div>
-          <div class="card">
-            <img src="img/6card.png" alt="" />
-            <h2>ПРЕПОДАВАТЕЛЬ</h2>
-            <p class="pTextDescription">
-              Предоставляется доступ к материалам на платформе ProgressMe. Вы
-              добавляете их к себе и можете задавать своим студентам
-              неограниченное количество раз.
-            </p>
-            <p class="price">Стоимость: 3990₽</p>
-          </div>
-        </div>
+      </section>
 
-        <div class="buttonContainer">
-          <button id="openFormBottom" class="open-form">Оставить заявку</button>
-
-
-          <div id="modal" class="form-popup">
-            <div class="form-container">
-              <span id="closeForm" class="close-button">&times;</span>
-              <h2>Оставьте заявку</h2>
-              <form id="contactForm" class="contactForm">
-                <label for="name">Фамилия Имя:</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name and surname"
-                  required
-                />
-
-                <label for="email">Ваша действующая почта :</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                />
-
-                <label for="phone"
-                  >Ваш номер телефона
-                  <span class="no-wrap">(Telegram, WhatsApp) :</span></label
-                >
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="Enter your phone number"
-                  required
-                />
-
-                <div class="chooseTariff">
-                  <h3>Выберите тариф</h3>
-                  <p>*Детский тариф + <span class="no-wrap">Взрослый тариф </span><span class="no-wrap">= 10% скидка</span></p>
-                </div>
-
-                <div class="tariffsWrapper">
-                  <div class="tariffs_L">
-                    <h4>Детские тарифы</h4>
-                    <div class="selectbox-container">
-                      <select class="editor traffic-editor child-traffic" name="options">
-                          <option value="" class="editor-placeholder" disabled selected hidden>Выберите тариф</option>
-                          <option value='{"name": "СНЕЖНЫЙ КВЕСТ", "price": "1990"}'>Снежный квест</option>
-                          <option value='{"name": "ПОД КРЫЛОМ САНТЫ", "price": "2990"}'>Под крылом Санты</option>
-                          <option value='{"name": "ПРЕПОДАВАТЕЛЬ", "price": "3990"}'>Преподаватель</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="tariffs_R">
-                    <h4>Взрослые тарифы</h4>
-                    <div class="selectbox-container">
-                      <select class="editor traffic-editor adult-traffic" name="options">
-                          <option value="" class="editor-placeholder" disabled selected hidden>Выберите тариф</option>
-                          <option value='{"name": "САМ СЕБЕ СНЕГОВИК", "price": "1990"}'>Сам себе снеговик</option>
-                          <option value='{"name": "ВМЕСТЕ С ЭЛЬФАМИ", "price": "2990"}'>Вместе с эльфами</option>
-                          <option value='{"name": "ПРЕПОДАВАТЕЛЬ", "price": "3990"}'>Преподаватель</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="approval">
-                  <label class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      name="approval"
-                      value="Согласие"
-                    />
-                    <span class="checkmark"></span>
-                    <span class="no-wrap spanApproval">Я даю согласие на обработку персональных данных</span>
-                  </label>
-                </div>
-                <div
-                  class="totalPrice"
-                  id="totalPrice"
-                  style="font-size: 20px; font-weight: bold"
-                >
-                  ИТОГО:&nbsp;<span id="totalPriceValue">0</span>₽
-                </div>
-                <div class="saleWrap">
-                  <div
-                    class="totalPriceWithoutDiscount"
-                    id="totalPriceWithoutDiscount"
-                    style="color: black; font-size: 16px"
-                  ></div>
-                  <div
-                    class="saleBackground"
-                    id="saleBackground"
-                    style="display: none"
-                  ><img src="img/Vector.svg" alt="">
-                    <span>-10%</span>
-                  </div>
-                </div>
-                <div class="buttonCenter">
-                  <button type="submit" id="submitButton">Отправить</button>
-                </div>
-                
-
-                <div id="error-message" style="color: red; display: none">
-                  Пожалуйста, выберите хотя бы один тариф.
-                </div>
-              </form>
-            </div>
-          </div>
-          <div
-            id="successNotification"
-            style="
-              display: none;
-              background-color: green;
-              color: white;
-              padding: 10px 20px;
-              position: fixed;
-              top: 10px;
-              left: 50%;
-              transform: translateX(-50%);
-              border-radius: 5px;
-              z-index: 9999;
-            "
-          >
-            Заявка успешно отправлена!
-          </div>
-
-          <div
-            id="errorNotification"
-            style="
-              display: none;
-              background-color: red;
-              color: white;
-              padding: 10px 20px;
-              position: fixed;
-              top: 10px;
-              left: 50%;
-              transform: translateX(-50%);
-              border-radius: 5px;
-              z-index: 9999;
-            "
-          >
-            Произошла ошибка при отправке. Попробуйте еще раз.
-          </div>
-        </div>
-      </div>
-      <div class="aboutMe" id="aboutMe">
-        <div class="backPrices">
-          <h1>Обо мне</h1>
-        </div>
-        <div class="aboutMeFull container">
-          <div class="aboutMeDescription">
-            <p>
-              Преподаю английский студентам от 5 лет. Готовлю к кембриджским
-              экзаменам (YL exams, KET, PET, FCE), к ЕГЭ/ОГЭ и преподаю
-              General English, провожу разговорные клубы и марафоны. На данный
-              момент веду уроки только онлайн. <br /><br />
-
-              <span class="mission">Моя миссия</span> — сделать английский
-              частью жизни моих студентов.<br /><br />
-
-              В своей работе я использую несколько подходов в зависимости от
-              цели студента, а именно: коммуникативный, лексический или
-              задачный метод обучения. Занятия проходят на интерактивной
-              платформе ProgressMe или в Zoom с доской Miro.<br /><br />
-
-              <span class="mission"
-                >Также я консультирую коллег по таким вопросам</span
-              >, как:<br />
-              -преподавание дошкольников<br />
-              -как подготовить детей к YL exams<br />
-              -как обучать онлайн (группа/индивид)<br />
-              -как обучать студентов с SEN<br />
-              ‌- организация внеучебных мероприятий<br />
-            </p>
-          </div>
-          <div class="aboutMePhoto">
-            <img src="img/Margo.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="myEducation">
-        <div class="backPrices">
-          <h1>Моё образование</h1>
-        </div>
+      <section class="section bg-surface" id="about" aria-labelledby="about-title">
         <div class="container">
-          <div class="carousel">
-            <input type="radio" id="carousel-1" name="carousel[]" checked />
-            <input type="radio" id="carousel-2" name="carousel[]" />
-            <input type="radio" id="carousel-3" name="carousel[]" />
-            <input type="radio" id="carousel-4" name="carousel[]" />
-            <input type="radio" id="carousel-5" name="carousel[]" />
-            <input type="radio" id="carousel-6" name="carousel[]" />
-            <input type="radio" id="carousel-7" name="carousel[]" />
-            <input type="radio" id="carousel-8" name="carousel[]" />
-            <ul class="carousel__items">
-              <li class="carousel__item">
-                <img src="img/edu1.jpg" alt="" />
+          <h2 class="section__title" id="about-title">
+            Преподаватель и методист с опытом более 7 лет
+          </h2>
+          <div class="about__grid">
+            <div class="prose">
+              <p>
+                Меня зовут Маргарита Волкова, я преподаватель и методист
+                английского языка с опытом более 7 лет. Работаю с детьми,
+                подростками и взрослыми. Помогаю учить язык в своём темпе, без
+                перегруза и с опорой на сильные стороны ученика.
+              </p>
+              <p>
+                Я — не просто преподаватель, а партнёр в обучении: поддержу,
+                направлю, подберу подход и материалы под ваш запрос. У меня за
+                плечами высшее педагогическое образование, квалификация
+                логопеда, TKT и множество курсов повышения квалификации.
+                Выступаю на конференциях в роли спикера.
+              </p>
+              <p>
+                <span class="lead-strong"
+                  >Мой подход — не загонять в рамки, а создать пространство, где
+                  язык становится живым и нужным.</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services" aria-labelledby="services-title">
+        <div class="container">
+          <h2 class="section__title section__title--center" id="services-title">
+            Услуги
+          </h2>
+          <p class="section__lead section__lead--center">
+            Работаю с разными уровнями и возрастами — подберу формат под вашу
+            цель.
+          </p>
+          <div class="services__grid mt-lg">
+            <article class="card">
+              <h3 class="card__title">Для детей и подростков</h3>
+              <ul>
+                <li>
+                  Подготовка к Кембриджским экзаменам (Pre A1 Starters, A1
+                  Movers, A2 Flyers, KET, PET)
+                </li>
+                <li>
+                  Подготовка к поступлению в школы и университеты в России и
+                  зарубежом
+                </li>
+                <li>
+                  Подготовка к российским государственным экзаменам (ОГЭ и ЕГЭ)
+                </li>
+                <li>
+                  Подтягивание школьной программы и развитие уверенности в языке
+                </li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3 class="card__title">Для взрослых</h3>
+              <ul>
+                <li>
+                  General English — системный английский для жизни, учёбы и
+                  работы
+                </li>
+                <li>Разговорные клубы по книгам, фильмам и сериалам</li>
+                <li>
+                  Подготовка к Кембриджским экзаменам (KET, PET, FCE)
+                </li>
+                <li>Подготовка к собеседованию или работе за рубежом</li>
+              </ul>
+            </article>
+          </div>
+          <div class="services__note">
+            <p>
+              В своей работе я использую несколько подходов в зависимости от
+              цели студента: коммуникативный, лексический или задачный метод
+              обучения. Все занятия проходят онлайн — индивидуально или в
+              мини-группах. Занятия проходят на интерактивной платформе
+              ProgressMe или в Zoom с доской Miro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section bg-surface"
+        id="lesson"
+        aria-labelledby="lesson-title"
+      >
+        <div class="container">
+          <h2 class="section__title section__title--center" id="lesson-title">
+            Как выглядит урок
+          </h2>
+          <div class="lesson-panels mt-lg">
+            <article class="lesson-panel">
+              <h3>Взрослые и подростки</h3>
+              <p>
+                Занимаемся на интерактивной платформе ProgressMe. Вас ждёт
+                собственный онлайн-класс: видеосвязь, классная работа, личный
+                словарик, домашнее задание и чат со мной.
+              </p>
+            </article>
+            <article class="lesson-panel">
+              <h3>Дети</h3>
+              <p>
+                Индивидуально и в групповом формате — Zoom и интерактивная доска
+                Miro. Все занятия проходят на английском языке.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pricing" aria-labelledby="pricing-title">
+        <div class="container">
+          <h2 class="section__title section__title--center" id="pricing-title">
+            Тарифы
+          </h2>
+          <p class="section__lead section__lead--center">
+            Актуальные цены на индивидуальные и групповые занятия. Выберите
+            формат и нажмите «Записаться» — в форме он подставится автоматически.
+          </p>
+          <div
+            class="pricing__grid mt-lg"
+            role="radiogroup"
+            aria-labelledby="pricing-title"
+          >
+            <label class="price-card price-card--selectable">
+              <input
+                class="visually-hidden"
+                type="radio"
+                name="tariff"
+                value="Индивидуально 40 мин (дошкольники / младшие школьники)"
+              />
+              <p class="price-card__type">Индивидуальные занятия</p>
+              <h3>40 минут</h3>
+              <p class="price-card__meta">
+                Для дошкольников или младших школьников
+              </p>
+              <p class="price-card__duration">40 мин</p>
+              <p class="price-card__amount">2500₽</p>
+            </label>
+            <label class="price-card price-card--selectable">
+              <input
+                class="visually-hidden"
+                type="radio"
+                name="tariff"
+                value="Индивидуально 60 мин"
+                checked
+              />
+              <p class="price-card__type">Индивидуальные занятия</p>
+              <h3>60 минут</h3>
+              <p class="price-card__meta">
+                Для школьников и взрослых (General English, подготовка к
+                экзаменам)
+              </p>
+              <p class="price-card__duration">60 мин</p>
+              <p class="price-card__amount">3000₽</p>
+            </label>
+            <label class="price-card price-card--selectable">
+              <input
+                class="visually-hidden"
+                type="radio"
+                name="tariff"
+                value="Группа / пара 60 мин"
+              />
+              <p class="price-card__type">Групповые / парные</p>
+              <h3>60 минут</h3>
+              <p class="price-card__meta">
+                Для двух человек и более (General English, подготовка к
+                экзаменам)
+              </p>
+              <p class="price-card__duration">60 мин</p>
+              <p class="price-card__amount">1500₽</p>
+            </label>
+          </div>
+          <p class="text-center mt-lg">
+            <button
+              type="button"
+              class="btn btn--primary js-open-modal js-open-modal--pricing"
+            >
+              Записаться на урок
+            </button>
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="section bg-surface"
+        id="reviews"
+        aria-labelledby="reviews-title"
+      >
+        <div class="container">
+          <h2 class="section__title section__title--center" id="reviews-title">
+            Что говорят ученики
+          </h2>
+          <div class="reviews-carousel mt-lg">
+            <div class="reviews-carousel__viewport">
+              <div class="reviews-carousel__track" id="reviews-track">
+                <div class="reviews-carousel__slide" data-reviews-slide>
+                  <div class="reviews__grid">
+                    <article class="review">
+                      <h3 class="review__author">Акимова Анна</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Я долго искала человека, с которым можно было бы
+                          проработать разговорную речь и аудирование, но не менее
+                          важным был вопрос — побороть смущение говорить с
+                          другими людьми и даже рядом с другими людьми на
+                          английском. Маргарита учла все особенности, чутко
+                          отнеслась к моему стеснению и внимательно
+                          прислушивалась, как я формулирую мысли, учила
+                          использовать в этом английский язык. Подготовленная
+                          программа была интересной, с разными заданиями, в том
+                          числе интерактивными. Особенно запомнились дискуссии
+                          по темам, обсуждение кусочков из фильмов и песни. По
+                          итогу мы пришли к стабильным результатам: повысился
+                          уровень владения языка, я начала говорить рядом с
+                          другими людьми, посмотрела полностью сериал на
+                          английском (и продолжаю смотреть другие фильмы), ко мне
+                          вернулась любовь к иностранному языку и мотивация к
+                          изучению. Если вы в поисках творческого, эмпатичного,
+                          энергичного и глубоко погруженного в знание языка
+                          педагога — однозначно рекомендую обратиться к
+                          Маргарите.
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                    <article class="review">
+                      <h3 class="review__author">Семешко Мария</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Целый учебный год занималась с Ритой подготовкой к
+                          ЕГЭ. Уроки проходили на эстетичной платформе, в которой
+                          есть словарик, который поможет потренировать новые
+                          слова. Сами уроки проходили в дружелюбной атмосфере,
+                          не было никакого давления со стороны учителя.
+                          Разговаривали мы полностью на английском, что
+                          помогало мне повысить свой разговорный английский. Не
+                          было напряжения, были шуточки😁. Не знаю как, но
+                          настроение у меня всегда повышалось после уроков,
+                          хотя обычно была уставшая. От Риты всегда
+                          чувствовалась поддержка и готовность помочь по любому
+                          вопросу в любое время. Очень доступно, буквально на
+                          пальцах (я даже сама удивлялась, насколько легко всё
+                          оказывается было) объясняет информацию. Страх пропал,
+                          английский стал менее пугающим. К домашним заданиям не
+                          строго, выслушает предложения, если что-то хочется
+                          отдельно потренировать. Для меня учителя делятся на
+                          два типа: те, которые всё усложняют в глазах студента,
+                          вселяют ужас и страх перед языком и те, кто подаёт
+                          материал с вайбом «всё на самом деле проще, чем тебе
+                          кажется» и «ты всё сможешь». Конечно, Рита второй
+                          вариант ❤️ Как итог 84 балла по ЕГЭ, всё благодаря
+                          моей adorable teacher!
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                    <article class="review">
+                      <h3 class="review__author">Могилевец Наталия</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Меня зовут Наташа, и я из тех, кто раз пять начинал
+                          учить английский и всегда сдавался. Марго – именно тот
+                          преподаватель, который сумел найти ко мне подход.
+                          Каждое занятие не похоже на предыдущее, и домашнее
+                          задание ненавязчивое. И что самое удивительное, мне
+                          действительно хочется его выполнять, хотя раньше я
+                          всячески этого избегала. К тому же, сейчас такой период
+                          в моей жизни, когда я могу сразу же применять
+                          полученные знания на практике, и это придает еще
+                          больше мотивации заниматься. Марго, благодарю за такое
+                          внимание и вовлеченность в свою работу! Желаю сил,
+                          терпения и благодарных учеников!
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+                <div class="reviews-carousel__slide" data-reviews-slide>
+                  <div class="reviews__grid">
+                    <article class="review">
+                      <h3 class="review__author">Куликов Пётр</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Изучали английский с Ритой несколько лет. За всё это
+                          время мне удалось сильно повысить уровень знания языка.
+                          Помогла не только дружелюбная и позитивная атмосфера,
+                          но и полный переход на изучаемый язык во время занятий.
+                          Нельзя не выразить благодарность Маргарите за то, что
+                          терпела такого ученика, как я 🤪 (кроме того, что нервы
+                          надо иметь стальные, ещё и подход найти). Благодаря
+                          испытаниям и мудростям от мастера английского языка
+                          Риты я могу отправиться в любую англоговорящую страну
+                          или прочитать любой текст на латинице.
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                    <article class="review">
+                      <h3 class="review__author">Пшеничный Сергей</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Моя жизнь делится на ДО и ПОСЛЕ начала обучения с Марго.
+                          Я постоянно убеждаюсь в том, что значение слова
+                          «преподаватель» я даже не знал раньше. Я теперь знаю,
+                          что недостаточно просто знать свой предмет, нужно уметь
+                          именно преподавать его. Вместе с Марго я не просто
+                          начал учить, я начал жить английским языком! Все мои
+                          любимые фильмы и сериалы теперь только на английском.
+                          Я о таком и мечтать не мог! Я тот самый человек, который
+                          тысячу раз пробует начать учить что либо, включая
+                          английский, но каждый раз бросал спустя неделю другую. А
+                          сейчас я пятый год занимаюсь с Марго и я понятия не
+                          имею, как можно после неё вообще хоть кому-то доверить
+                          своё обучение. Языковой барьер побеждён, страх ошибок
+                          исчез, а это очень важно, чтобы расти в уровне своих
+                          знаний и это всё благодаря тому, что занятия полностью
+                          на английском языке, и у неё есть суперспособность
+                          подстраивать свою речь под тот уровень, которым я
+                          владею на данный момент. Для меня каждое занятие — это
+                          удовольствие, после которого заряжаешься на весь день!
+                          Начать заниматься с Марго — одно из лучших моих решений
+                          в жизни. И я хочу, чтобы весь мир знал и увидел, что
+                          такое настоящий преподаватель!
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                    <article class="review">
+                      <h3 class="review__author">Родители учениц</h3>
+                      <div class="review__text-wrap">
+                        <p class="review__text">
+                          Дочь (6 лет) занимается с Маргаритой почти год. Уже
+                          видны результаты 👍 Даже младший (3 года) повторяет
+                          английскую речь, подражая старшей. Маргарита всегда
+                          находит подход к моей стеснительной ученице, в каком бы
+                          настроении не был ребёнок. Продолжаем заниматься с
+                          огромным удовольствием и всем рекомендуем такого
+                          замечательного педагога! ❤️
+                        </p>
+                      </div>
+                      <div class="review__actions">
+                        <button type="button" class="review__more">
+                          Читать далее
+                        </button>
+                        <button type="button" class="review__less" hidden>
+                          Скрыть
+                        </button>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="reviews-carousel__controls">
+              <button
+                type="button"
+                class="reviews-carousel__btn"
+                id="reviews-prev"
+                aria-label="Предыдущие отзывы"
+              >
+                ‹
+              </button>
+              <span class="reviews-carousel__counter" id="reviews-counter"
+                >1 / 2</span
+              >
+              <button
+                type="button"
+                class="reviews-carousel__btn"
+                id="reviews-next"
+                aria-label="Следующие отзывы"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="education" aria-labelledby="education-title">
+        <div class="container text-center">
+          <h2 class="section__title section__title--center" id="education-title">
+            Моё образование
+          </h2>
+          <p class="section__lead" style="margin-inline: auto">
+            Дипломы, сертификаты и курсы повышения квалификации.
+          </p>
+          <div class="edu-carousel mt-lg">
+            <div class="edu-carousel__viewport">
+              <img
+                id="edu-slide-img"
+                src="assets/images/edu1.jpg"
+                width="800"
+                height="600"
+                alt="Сертификат или диплом"
+              />
+            </div>
+            <div class="edu-carousel__controls">
+              <button
+                type="button"
+                class="edu-carousel__btn"
+                id="edu-prev"
+                aria-label="Предыдущий документ"
+              >
+                ‹
+              </button>
+              <span class="edu-carousel__counter" id="edu-counter">1 / 8</span>
+              <button
+                type="button"
+                class="edu-carousel__btn"
+                id="edu-next"
+                aria-label="Следующий документ"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section bg-surface" id="faq" aria-labelledby="faq-title">
+        <div class="container">
+          <h2 class="section__title text-center" id="faq-title">
+            Вопросы и ответы
+          </h2>
+          <div class="faq-list mt-lg">
+            <details class="faq-item">
+              <summary>Что нужно для занятий по английскому языку?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Стабильный интернет, компьютер или планшет с камерой и
+                  микрофоном (удобные наушники приветствуются). Для платформы
+                  ProgressMe — актуальный браузер; для занятий в Zoom —
+                  установленное приложение или браузерная версия. Перед первым
+                  уроком подскажу, что установить и как подключиться.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Есть ли бесплатное пробное занятие?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Возможность пробного знакомства обсуждается индивидуально:
+                  напишите мне удобным способом (форма на сайте, Telegram или
+                  WhatsApp), и мы согласуем формат и время.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Как производится оплата?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Условия и способ оплаты (пакет занятий, разовый платёж и т.д.)
+                  фиксируем после согласования расписания. Подробности вышлю при
+                  записи.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Вы даёте домашнее задание?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Да, по необходимости — в объёме, который реалистично вписать в
+                  вашу неделю. Домашка помогает закреплять материал, но не
+                  должна перегружать.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Отмена занятий</summary>
+              <div class="faq-item__body">
+                <p>
+                  Перенос или отмена возможны по предварительной договорённости.
+                  Обычно прошу предупреждать заранее (не позднее чем за 24 часа
+                  до урока), чтобы освободить слот для других учеников — точные
+                  условия согласуем при старте занятий.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contacts" aria-labelledby="contacts-title">
+        <div class="container">
+          <h2 class="section__title section__title--center" id="contacts-title">
+            Контакты
+          </h2>
+          <div class="contacts__grid mt-lg">
+            <div class="contacts__intro">
+              <h3 class="section__title contacts__intro-title" style="font-size: 1.35rem">
+                По вопросам сотрудничества и записи
+              </h3>
+              <p class="section__lead contacts__intro-lead" style="margin-top: 0.75rem">
+                Напишите удобным способом или оставьте заявку через форму — я
+                отвечу и предложу время для знакомства.
+              </p>
+              <p class="contacts__cta mt-lg">
+                <button type="button" class="btn btn--primary js-open-modal">
+                  Оставить заявку
+                </button>
+              </p>
+            </div>
+            <ul class="contact-list">
+              <li>
+                <span class="contact-label">Email</span>
+                <a href="mailto:maggievikhareva@gmail.com"
+                  >maggievikhareva@gmail.com</a
+                >
               </li>
-              <li class="carousel__item">
-                <img src="img/edu2.jpg" alt="" />
+              <li>
+                <span class="contact-label">WhatsApp</span>
+                <a href="https://wa.me/79537444988" target="_blank" rel="noopener"
+                  >+7 953 744-49-88</a
+                >
               </li>
-              <li class="carousel__item">
-                <img src="img/edu3.jpeg" alt="" />
-              </li>
-              <li class="carousel__item">
-                <img src="img/edu4.jpeg" alt="" />
-              </li>
-              <li class="carousel__item">
-                <img src="img/edu5.jpg" alt="" />
-              </li>
-              <li class="carousel__item">
-                <img src="img/edu6.jpg" alt="" />
-              </li>
-              <li class="carousel__item">
-                <img src="img/edu7.jpeg" alt="" />
-              </li>
-              <li class="carousel__item">
-                <img src="img/edu8.jpg" alt="" />
+              <li>
+                <span class="contact-label">Telegram</span>
+                <a href="https://t.me/engvolkova" target="_blank" rel="noopener"
+                  >@engvolkova</a
+                >
               </li>
             </ul>
-            <div class="carousel__prev">
-              <label for="carousel-1"></label>
-              <label for="carousel-2"></label>
-              <label for="carousel-3"></label>
-              <label for="carousel-4"></label>
-              <label for="carousel-5"></label>
-              <label for="carousel-6"></label>
-              <label for="carousel-7"></label>
-              <label for="carousel-8"></label>
-            </div>
-            <div class="carousel__next">
-              <label for="carousel-1"></label>
-              <label for="carousel-2"></label>
-              <label for="carousel-3"></label>
-              <label for="carousel-4"></label>
-              <label for="carousel-5"></label>
-              <label for="carousel-6"></label>
-              <label for="carousel-7"></label>
-              <label for="carousel-8"></label>
-            </div>
-            <div class="carousel__nav">
-              <label for="carousel-1"></label>
-              <label for="carousel-2"></label>
-              <label for="carousel-3"></label>
-              <label for="carousel-4"></label>
-              <label for="carousel-5"></label>
-              <label for="carousel-6"></label>
-              <label for="carousel-7"></label>
-              <label for="carousel-8"></label>
-            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
 
-    <footer>
-      <div class="footerText" id="contacts">
-        <h3>
-          По всем вопросам<br />
-          сотрудничества
-        </h3>
-      </div>
-      <div class="footerDivider margin-auto"></div>
-      <div class="footerContact">
-        <p>
-          E-mail:
-          <a href="mailto:mvikhareva@icloud.com">mvikhareva@icloud.com</a>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p style="margin: 0; font-size: 0.9rem">
+          © Маргарита Волкова · Преподаватель английского языка
         </p>
-      </div>
-      <div class="footerSocial">
-        <ul>
-          <li>
-            <a href="https://t.me/maggvlk" target="_blank"
-              ><img src="img/telegram_red.svg" alt=""
-            /></a>
-          </li>
-          <li>
-            <a href="https://wa.me/79537444988" target="_blank"
-              ><img src="img/whatsapp_red.svg" alt=""
-            /></a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/maggvlk/" target="_blank"
-              ><img src="img/instagram_red.svg" alt=""
-            /></a>
-          </li>
-        </ul>
+        <nav class="footer-nav" aria-label="Юридическая информация">
+          <a href="pages/offer.html">Публичная оферта</a>
+          <a href="pages/privacy.html">Политика обработки персональных данных</a>
+          <a href="#top">Наверх</a>
+        </nav>
       </div>
     </footer>
+
+    <div
+      class="modal"
+      id="contact-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal__dialog">
+        <button
+          type="button"
+          class="modal__close"
+          id="modal-close"
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+        <h2 class="modal__title" id="modal-title">Запись на урок</h2>
+        <p class="modal__hint">Я свяжусь с вами для уточнения целей и времени.</p>
+        <form id="contact-form" class="modal__form" novalidate>
+          <div class="form-field">
+            <label for="cf-name">Имя и фамилия</label>
+            <input
+              type="text"
+              id="cf-name"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Как к вам обращаться"
+            />
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input
+              type="email"
+              id="cf-email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div class="form-field">
+            <label for="cf-phone">Телефон или мессенджер</label>
+            <input
+              type="tel"
+              id="cf-phone"
+              name="phone"
+              required
+              autocomplete="tel"
+              placeholder="+7…"
+            />
+          </div>
+          <div class="form-field">
+            <label for="cf-interest">Формат занятий</label>
+            <select id="cf-interest" name="interest" required>
+              <option value="" disabled selected>Выберите вариант</option>
+              <option value="Индивидуально 40 мин (дошкольники / младшие школьники)">
+                40 мин, младшие / дошкольники
+              </option>
+              <option value="Индивидуально 60 мин">
+                60 мин, индивидуально
+              </option>
+              <option value="Группа / пара 60 мин">
+                60 мин, пара / группа
+              </option>
+              <option value="Нужна консультация / не уверен(а)">
+                Нужна консультация
+              </option>
+            </select>
+          </div>
+          <div class="form-field form-field--message">
+            <label for="cf-message">Комментарий <span class="form-optional">необяз.</span></label>
+            <textarea
+              id="cf-message"
+              name="message"
+              rows="1"
+              placeholder="По желанию"
+            ></textarea>
+          </div>
+          <label class="checkbox-field">
+            <input type="checkbox" id="cf-consent" name="consent" required />
+            <span
+              >Я согласен(на) на
+              <a href="pages/privacy.html" target="_blank" rel="noopener"
+                >обработку персональных данных</a
+              ></span
+            >
+          </label>
+          <button type="submit" class="btn btn--primary form-submit" disabled>
+            Отправить
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="toast toast--ok"
+      id="toast-ok"
+      role="status"
+      aria-live="polite"
+    ></div>
+    <div
+      class="toast toast--err"
+      id="toast-err"
+      role="alert"
+      aria-live="assertive"
+    ></div>
+
     <script
-      type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
     ></script>
-    <script src="script.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
   </body>
 </html>
