@@ -29,6 +29,30 @@
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
 
+  /* Моб. герой: фиксируем высоту окна при загрузке (как в main.css max-width: 899px),
+     чтобы при скрытии/показе адресной строки layout не пересчитывался. Обновляем
+     при смене ширины брейкпоинта и после поворота экрана. */
+  var heroViewportMql = window.matchMedia("(max-width: 899px)");
+  function syncHeroViewportHeight() {
+    if (!heroViewportMql.matches) {
+      document.documentElement.style.removeProperty("--hero-viewport-h");
+      return;
+    }
+    document.documentElement.style.setProperty(
+      "--hero-viewport-h",
+      window.innerHeight + "px"
+    );
+  }
+  syncHeroViewportHeight();
+  if (heroViewportMql.addEventListener) {
+    heroViewportMql.addEventListener("change", syncHeroViewportHeight);
+  } else if (heroViewportMql.addListener) {
+    heroViewportMql.addListener(syncHeroViewportHeight);
+  }
+  window.addEventListener("orientationchange", function () {
+    window.setTimeout(syncHeroViewportHeight, 200);
+  });
+
   /* ---------- Тарифы: подсветка выбранной карточки ---------- */
   function syncTariffCardVisual() {
     $all('input[name="tariff"]').forEach(function (r) {

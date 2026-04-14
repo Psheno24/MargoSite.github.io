@@ -541,11 +541,14 @@ a:hover {
 
 @media (max-width: 899px) {
   /* Явная высота = окно минус шапка: иначе % и max-height:100% у img не срабатывают, кнопки уезжают */
+  /* Высота: 100dvh не использовать — при скрытии адресной строки визуальный viewport
+     растёт и блок пересчитывается («скачки»). 100svh стабильнее; плюс --hero-viewport-h
+     фиксируется в JS при загрузке (см. main.js). */
   .hero {
     min-height: calc(100vh - var(--header-h));
     height: calc(100vh - var(--header-h));
-    min-height: calc(100svh - var(--header-h));
-    height: calc(100svh - var(--header-h));
+    min-height: calc(var(--hero-viewport-h, 100svh) - var(--header-h));
+    height: calc(var(--hero-viewport-h, 100svh) - var(--header-h));
     padding-top: clamp(0.35rem, 1.5vmin, 0.75rem);
     padding-bottom: 0;
     padding-inline: max(0px, env(safe-area-inset-left, 0px))
@@ -555,13 +558,6 @@ a:hover {
     align-items: stretch;
     box-sizing: border-box;
     overflow: hidden;
-  }
-
-  @supports (height: 100dvh) {
-    .hero {
-      min-height: calc(100dvh - var(--header-h));
-      height: calc(100dvh - var(--header-h));
-    }
   }
 
   /* basis 0% + flex-grow: герой заполняет экран на iOS (в т.ч. iPhone Pro Max) */
@@ -1495,7 +1491,8 @@ label.price-card {
   --modal-pad-y: clamp(0.85rem, 2.5vw, 1.15rem);
   --modal-field-gap: clamp(0.75rem, 2.2vw, 1rem);
   --modal-input-bg: #faf9f7;
-  width: min(100%, 28.5rem);
+  /* Плавная ширина: телефон → планшет → почти десктоп */
+  width: min(100%, clamp(20.5rem, 86vw, 36rem));
   max-height: calc(
     100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) -
       1rem
@@ -1518,10 +1515,10 @@ label.price-card {
   transform: translateY(0) scale(1);
 }
 
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   .modal__dialog {
     max-height: calc(
-      100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) -
+      100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) -
         1rem
     );
   }
