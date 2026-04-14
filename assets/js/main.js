@@ -29,10 +29,12 @@
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
 
-  /* Моб. герой: --hero-viewport-h и явная высота .hero в px (окно минус .site-header),
-     чтобы при скрытии/показе адресной строки блок не пересчитывался. Обновляем при
-     смене брейкпоинта и после поворота экрана. */
+  /* Моб. герой: --hero-viewport-h и явная высота .hero в px (окно минус .site-header).
+     В Яндекс.Браузере при скрытии панели visualViewport.resize — пересчитываем полосу
+     и берём высоту из visualViewport; иначе фикс. высота + смена отступов = ужимание фото. */
   var heroViewportMql = window.matchMedia("(max-width: 899px)");
+  var heroYandexChromium =
+    /YaBrowser|YandexBrowser/i.test(navigator.userAgent || "");
   function syncHeroViewportHeight() {
     var hero = document.querySelector(".hero");
     if (!heroViewportMql.matches) {
@@ -44,6 +46,13 @@
       return;
     }
     var innerH = window.innerHeight;
+    if (
+      heroYandexChromium &&
+      window.visualViewport &&
+      typeof window.visualViewport.height === "number"
+    ) {
+      innerH = Math.round(window.visualViewport.height);
+    }
     document.documentElement.style.setProperty(
       "--hero-viewport-h",
       innerH + "px"
@@ -67,6 +76,16 @@
   window.addEventListener("orientationchange", function () {
     window.setTimeout(syncHeroViewportHeight, 200);
   });
+
+  var heroResizeTimer;
+  function scheduleHeroViewportSync() {
+    clearTimeout(heroResizeTimer);
+    heroResizeTimer = setTimeout(syncHeroViewportHeight, 120);
+  }
+  if (heroYandexChromium && window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleHeroViewportSync);
+    window.addEventListener("resize", scheduleHeroViewportSync);
+  }
 
   /* ---------- Тарифы: подсветка выбранной карточки ---------- */
   function syncTariffCardVisual() {

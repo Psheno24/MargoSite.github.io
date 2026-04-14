@@ -544,10 +544,9 @@ a:hover {
   /* Высота: 100dvh не использовать — при скрытии адресной строки визуальный viewport
      растёт и блок пересчитывается («скачки»). 100svh стабильнее; плюс --hero-viewport-h
      и inline height/min-height в px на .hero — в main.js. Клампы героя: svw/svmin вместо
-     vw/vmin, чтобы в Chromium (в т.ч. Яндекс) размеры фото и кнопок не следовали за UI. */
+     vw/vmin. У .hero__actions--mobile нижний padding с max(env, 20px), чтобы inset не
+     «догонял» с нуля после скрытия панели и не ужимал flex с фото. */
   .hero {
-    min-height: calc(100vh - var(--header-h));
-    height: calc(100vh - var(--header-h));
     min-height: calc(var(--hero-viewport-h, 100svh) - var(--header-h));
     height: calc(var(--hero-viewport-h, 100svh) - var(--header-h));
     padding-top: clamp(0.35rem, 1.5svmin, 0.75rem);
@@ -686,7 +685,11 @@ a:hover {
     width: 100%;
     margin-top: auto;
     padding-top: clamp(0.45rem, 2svmin, 0.85rem);
-    padding-bottom: max(0.85rem, calc(env(safe-area-inset-bottom, 0px) + 0.35rem));
+    /* Нижний «chin»: max(env, 20px) — чтобы при 0→полный inset после скрытия панели не
+       было резкого роста отступа и ужимания flex-блока с фото (Яндекс и др.). */
+    padding-bottom: calc(
+      0.85rem + max(20px, env(safe-area-inset-bottom, 0px))
+    );
     position: relative;
     z-index: 5;
     background: var(--color-bg);
