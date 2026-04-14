@@ -67,6 +67,7 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
 }
 
 /* Только body: блокировка фона; html не трогаем — иначе на iOS часто ломается скролл внутри fixed-меню */
@@ -1194,14 +1195,67 @@ label.price-card {
   gap: clamp(1.35rem, 3.5vw, 2rem);
 }
 
+.contacts__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.8vw + 0.2rem, 1.5rem);
+  padding-inline: clamp(0.5rem, 3.5vw, 1.25rem);
+}
+
 .contacts__intro-title,
 .contacts__intro-lead {
   text-align: center;
 }
 
+.contacts__intro-title {
+  margin-bottom: 0;
+}
+
 /* Узкий lead остаётся по центру колонки, а не прижатым влево */
 .contacts__intro-lead {
   margin-inline: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.contacts__intro .contacts__cta {
+  margin-top: 0;
+}
+
+/* Почта и Telegram столбиком: один зазор между пунктами и столько же сверху/снизу */
+#contacts .contact-list {
+  --contact-stack-space: clamp(0.85rem, 2.8vw, 1.35rem);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--contact-stack-space);
+  padding-block: var(--contact-stack-space);
+  margin-block: 0;
+}
+
+#contacts .contact-list li {
+  flex: none;
+  width: 100%;
+  max-width: min(22rem, 100%);
+  min-width: 0;
+}
+
+/* Узкий контейнер: компактнее шрифты и зазор */
+@container contacts (max-width: 41.98rem) {
+  #contacts .contact-list {
+    --contact-stack-space: clamp(0.65rem, 2.2vw, 1rem);
+  }
+
+  #contacts .contact-list a {
+    font-size: clamp(0.68rem, 2.2vw + 0.25rem, 0.875rem);
+    overflow-wrap: anywhere;
+  }
+
+  #contacts .contact-list .contact-label {
+    font-size: clamp(0.62rem, 1.8vw + 0.2rem, 0.72rem);
+    letter-spacing: 0.06em;
+  }
 }
 
 @container contacts (min-width: 42rem) {
@@ -1209,19 +1263,96 @@ label.price-card {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
+
+  #contacts .contacts__intro {
+    gap: clamp(1.05rem, 2.2vw + 0.45rem, 1.85rem);
+    padding-inline: clamp(1rem, 5vw, 2.25rem);
+    padding-block-start: 0;
+    padding-block-end: clamp(0.35rem, 1.5vw, 0.85rem);
+    justify-content: flex-start;
+    align-self: start;
+    width: 100%;
+    max-width: min(38rem, 100%);
+  }
+
+  #contacts .contact-list {
+    justify-content: flex-start;
+    align-self: start;
+    padding-block-start: 0;
+    padding-block-end: var(--contact-stack-space);
+    margin-block-start: 0;
+    width: 100%;
+  }
+
+  #contacts .contact-list a {
+    font-size: inherit;
+    overflow-wrap: break-word;
+  }
+
+  #contacts .contact-list .contact-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
 }
 
 @supports not (container-type: inline-size) {
+  @media (max-width: 47.99rem) {
+    #contacts .contact-list {
+      --contact-stack-space: clamp(0.65rem, 2.2vw, 1rem);
+    }
+
+    #contacts .contact-list a {
+      font-size: clamp(0.68rem, 2.2vw + 0.25rem, 0.875rem);
+      overflow-wrap: anywhere;
+    }
+
+    #contacts .contact-list .contact-label {
+      font-size: clamp(0.62rem, 1.8vw + 0.2rem, 0.72rem);
+      letter-spacing: 0.06em;
+    }
+  }
+
   @media (min-width: 48rem) {
     .contacts__grid {
       grid-template-columns: 1fr 1fr;
       align-items: start;
+    }
+
+    #contacts .contacts__intro {
+      gap: clamp(1.05rem, 2.2vw + 0.45rem, 1.85rem);
+      padding-inline: clamp(1rem, 5vw, 2.25rem);
+      padding-block-start: 0;
+      padding-block-end: clamp(0.35rem, 1.5vw, 0.85rem);
+      justify-content: flex-start;
+      align-self: start;
+      width: 100%;
+      max-width: min(38rem, 100%);
+    }
+
+    #contacts .contact-list {
+      justify-content: flex-start;
+      align-self: start;
+      padding-block-start: 0;
+      padding-block-end: var(--contact-stack-space);
+      margin-block-start: 0;
+      width: 100%;
+    }
+
+    #contacts .contact-list a {
+      font-size: inherit;
+      overflow-wrap: break-word;
+    }
+
+    #contacts .contact-list .contact-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
     }
   }
 }
 
 .contacts__cta {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .contact-list {
@@ -1231,7 +1362,7 @@ label.price-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2.5vw, 1.375rem);
   text-align: center;
   width: 100%;
 }
@@ -1242,11 +1373,14 @@ label.price-card {
   flex-direction: column;
   align-items: center;
   max-width: 100%;
+  /* Подпись и ссылка — один визуальный блок */
+  gap: 0.2rem;
 }
 
 .contact-list a {
   font-weight: 500;
   word-break: break-word;
+  line-height: 1.35;
 }
 
 .contact-label {
@@ -1257,6 +1391,11 @@ label.price-card {
   text-transform: uppercase;
   color: var(--color-text-muted);
   margin-bottom: 0.25rem;
+}
+
+.contact-list .contact-label {
+  margin-bottom: 0;
+  line-height: 1.2;
 }
 
 .site-footer {
