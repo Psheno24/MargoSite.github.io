@@ -28,6 +28,8 @@
   /* Резерв под текст + кнопки в моб. герое (подбор max-height фото) */
   --hero-chrome: clamp(8rem, 5rem + 20svmin, 16.5rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Ширина центрированного лида секции — тарифы/отзывы в 1 колонку совпадают с ней */
+  --section-center-text-max: 40rem;
 }
 
 *,
@@ -149,7 +151,7 @@ a:hover {
 .section__lead--center {
   text-align: center;
   margin-inline: auto;
-  max-width: 40rem;
+  max-width: var(--section-center-text-max);
 }
 
 .visually-hidden {
@@ -190,7 +192,7 @@ a:hover {
 .site-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
   min-height: var(--header-inner-h);
   width: var(--container);
@@ -198,6 +200,7 @@ a:hover {
 }
 
 .site-logo {
+  flex-shrink: 0;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: clamp(1.02rem, 0.95rem + 0.45vw, 1.15rem);
@@ -287,6 +290,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
   width: 48px;
   height: 48px;
   padding: 0;
@@ -412,6 +416,9 @@ a:hover {
   }
   .nav-desktop {
     display: flex;
+    flex: 1 1 0%;
+    min-width: 0;
+    align-items: center;
   }
 }
 
@@ -818,21 +825,38 @@ a:hover {
 .pricing__grid {
   display: grid;
   gap: clamp(0.85rem, 2vw, 1.25rem);
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 15.5rem), 1fr)
-  );
+  /* Только 1 или 3 колонки — без «2+1» на средних ширинах */
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 899px) {
+  .pricing__grid {
+    max-width: var(--section-center-text-max);
+    width: 100%;
+    margin-inline: auto;
+    /* Доп. поля к контейнеру: на телефонах карточки визуально уже */
+    padding-inline: clamp(1.25rem, 6.5vw + 0.5rem, 2.75rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .pricing__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .price-card {
+  max-width: min(450px, 100%);
+  width: 100%;
+  justify-self: center;
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
-  padding: clamp(1.15rem, 2.2vw + 0.45rem, 1.75rem)
-    clamp(1.1rem, 2vw + 0.4rem, 1.5rem);
+  padding: clamp(0.85rem, 1.4vw + 0.55rem, 1.75rem)
+    clamp(0.95rem, 1.6vw + 0.5rem, 1.5rem);
   border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 0;
 }
 
 label.price-card {
@@ -855,41 +879,53 @@ label.price-card {
 }
 
 .price-card__type {
-  font-size: 0.72rem;
+  font-size: clamp(0.68rem, 0.62rem + 0.2vw, 0.72rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.3rem, 0.5vw + 0.15rem, 0.5rem);
 }
 
 .price-card h3 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  margin: 0 0 0.5rem;
+  font-size: clamp(1.05rem, 0.92rem + 0.55vw, 1.2rem);
+  margin: 0 0 clamp(0.3rem, 0.5vw + 0.15rem, 0.5rem);
 }
 
 .price-card__meta {
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 0.84rem + 0.2vw, 0.95rem);
   color: var(--color-text-muted);
-  margin: 0 0 1.25rem;
-  flex-grow: 1;
+  margin: 0 0 clamp(0.55rem, 1.1vw + 0.3rem, 1.25rem);
+  line-height: 1.45;
+  flex-grow: 0;
 }
 
 .price-card__duration {
   display: inline-block;
   font-weight: 600;
   color: var(--color-text);
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
+  font-size: clamp(1.2rem, 0.95rem + 1vw, 1.5rem);
+  margin-bottom: clamp(0.12rem, 0.25vw + 0.05rem, 0.25rem);
 }
 
 .price-card__amount {
-  font-size: 2rem;
+  font-size: clamp(1.55rem, 1.1rem + 1.5vw, 2rem);
   font-weight: 700;
   font-family: var(--font-display);
   color: var(--color-text);
   margin: 0;
+}
+
+@media (min-width: 900px) {
+  .price-card {
+    min-height: 100%;
+  }
+
+  .price-card__meta {
+    flex-grow: 1;
+    margin-bottom: clamp(0.65rem, 1vw + 0.35rem, 1.25rem);
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -914,10 +950,22 @@ label.price-card {
 .reviews-carousel__slide .reviews__grid {
   display: grid;
   gap: clamp(0.85rem, 2vw, 1.25rem);
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 15.5rem), 1fr)
-  );
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 899px) {
+  .reviews-carousel__slide .reviews__grid {
+    max-width: var(--section-center-text-max);
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 6.5vw + 0.5rem, 2.75rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .reviews-carousel__slide .reviews__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .reviews-carousel__controls {
@@ -1151,15 +1199,15 @@ label.price-card {
   text-align: center;
 }
 
+/* Узкий lead остаётся по центру колонки, а не прижатым влево */
+.contacts__intro-lead {
+  margin-inline: auto;
+}
+
 @container contacts (min-width: 42rem) {
   .contacts__grid {
     grid-template-columns: 1fr 1fr;
     align-items: start;
-  }
-
-  .contacts__intro-title,
-  .contacts__intro-lead {
-    text-align: left;
   }
 }
 
@@ -1168,11 +1216,6 @@ label.price-card {
     .contacts__grid {
       grid-template-columns: 1fr 1fr;
       align-items: start;
-    }
-
-    .contacts__intro-title,
-    .contacts__intro-lead {
-      text-align: left;
     }
   }
 }
@@ -1185,10 +1228,20 @@ label.price-card {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  width: 100%;
 }
 
 .contact-list li {
-  margin-bottom: 1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
 }
 
 .contact-list a {
@@ -1217,6 +1270,15 @@ label.price-card {
   color: rgba(255, 255, 255, 0.9);
 }
 
+.site-footer__copy {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.site-footer__role {
+  white-space: nowrap;
+}
+
 .site-footer__inner {
   width: var(--container);
   margin-inline: auto;
@@ -1241,12 +1303,7 @@ label.price-card {
   flex-wrap: wrap;
   gap: 1rem 1.5rem;
   justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .footer-nav {
-    justify-content: flex-end;
-  }
+  align-items: center;
 }
 
 .footer-nav a {
@@ -1575,8 +1632,11 @@ label.price-card {
 
 .page-sub .nav-desktop {
   display: flex;
+  flex: 1 1 0%;
+  min-width: 0;
   flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: center;
   gap: 0.5rem;
 }
 
