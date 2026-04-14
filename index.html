@@ -705,98 +705,119 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      aria-describedby="modal-desc"
     >
       <div class="modal__dialog">
         <button
           type="button"
           class="modal__close"
           id="modal-close"
-          aria-label="Закрыть"
+          aria-label="Закрыть окно"
         >
-          ×
+          <span class="modal__close-icon" aria-hidden="true"></span>
         </button>
-        <h2 class="modal__title" id="modal-title">Запись на урок</h2>
-        <p class="modal__hint">
-          Я свяжусь с вами для уточнения целей и времени.
-        </p>
-        <form id="contact-form" class="modal__form" novalidate>
-          <div class="form-field">
-            <label for="cf-name">Имя и фамилия</label>
-            <input
-              type="text"
-              id="cf-name"
-              name="name"
-              required
-              autocomplete="name"
-              placeholder="Как к вам обращаться"
-            />
-          </div>
-          <div class="form-field">
-            <label for="cf-email">Email</label>
-            <input
-              type="email"
-              id="cf-email"
-              name="email"
-              required
-              autocomplete="email"
-              placeholder="you@example.com"
-            />
-          </div>
-          <div class="form-field">
-            <label for="cf-phone">Телефон или мессенджер</label>
-            <input
-              type="tel"
-              id="cf-phone"
-              name="phone"
-              required
-              autocomplete="tel"
-              placeholder="+7…"
-            />
-          </div>
-          <div class="form-field">
-            <label for="cf-interest">Формат занятий</label>
-            <select id="cf-interest" name="interest" required>
-              <option value="" disabled selected>Выберите вариант</option>
-              <option
-                value="Индивидуально 40 мин (дошкольники / младшие школьники)"
-              >
-                40 мин, младшие / дошкольники
-              </option>
-              <option value="Индивидуально 60 мин">
-                60 мин, индивидуально
-              </option>
-              <option value="Группа / пара 60 мин">
-                60 мин, пара / группа
-              </option>
-              <option value="Нужна консультация / не уверен(а)">
-                Нужна консультация
-              </option>
-            </select>
-          </div>
-          <div class="form-field form-field--message">
-            <label for="cf-message"
-              >Комментарий <span class="form-optional">необяз.</span></label
-            >
-            <textarea
-              id="cf-message"
-              name="message"
-              rows="1"
-              placeholder="По желанию"
-            ></textarea>
-          </div>
-          <label class="checkbox-field">
-            <input type="checkbox" id="cf-consent" name="consent" required />
-            <span
-              >Я согласен(на) на
-              <a href="pages/privacy.html" target="_blank" rel="noopener"
-                >обработку персональных данных</a
-              ></span
-            >
-          </label>
-          <button type="submit" class="btn btn--primary form-submit" disabled>
-            Отправить
-          </button>
-        </form>
+        <div class="modal__header">
+          <h2 class="modal__title" id="modal-title">Запись на урок</h2>
+          <p class="modal__hint" id="modal-desc">
+            Я свяжусь с вами для уточнения целей и времени.
+          </p>
+        </div>
+        <div class="modal__body">
+          <form
+            id="contact-form"
+            class="modal__form"
+            novalidate
+            aria-describedby="modal-desc"
+          >
+            <div class="modal__fields">
+              <div class="form-field form-field--full">
+                <label for="cf-name">Имя и фамилия</label>
+                <input
+                  type="text"
+                  id="cf-name"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  placeholder="Как к вам обращаться"
+                  enterkeyhint="next"
+                />
+              </div>
+              <div class="form-field form-field--half">
+                <label for="cf-email">Email</label>
+                <input
+                  type="email"
+                  id="cf-email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  inputmode="email"
+                  placeholder="you@example.com"
+                  enterkeyhint="next"
+                />
+              </div>
+              <div class="form-field form-field--half">
+                <label for="cf-phone">Телефон или мессенджер</label>
+                <input
+                  type="tel"
+                  id="cf-phone"
+                  name="phone"
+                  required
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="+7 …"
+                  enterkeyhint="next"
+                />
+              </div>
+              <div class="form-field form-field--full">
+                <label for="cf-interest">Формат занятий</label>
+                <div class="form-field__select-wrap">
+                  <select id="cf-interest" name="interest" required>
+                    <option value="" disabled selected>Выберите вариант</option>
+                    <option
+                      value="Индивидуально 40 мин (дошкольники / младшие школьники)"
+                    >
+                      40 мин, младшие / дошкольники
+                    </option>
+                    <option value="Индивидуально 60 мин">
+                      60 мин, индивидуально
+                    </option>
+                    <option value="Группа / пара 60 мин">
+                      60 мин, пара / группа
+                    </option>
+                    <option value="Нужна консультация / не уверен(а)">
+                      Нужна консультация
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-field form-field--message form-field--full">
+                <label for="cf-message">
+                  Комментарий
+                  <span class="form-optional">необязательно</span>
+                </label>
+                <textarea
+                  id="cf-message"
+                  name="message"
+                  rows="3"
+                  placeholder="Цели, удобное время, вопросы…"
+                  enterkeyhint="done"
+                ></textarea>
+              </div>
+            </div>
+            <label class="checkbox-field">
+              <input type="checkbox" id="cf-consent" name="consent" required />
+              <span>
+                Я согласен(на) на
+                <a href="pages/privacy.html" target="_blank" rel="noopener"
+                  >обработку персональных данных</a
+                >
+              </span>
+            </label>
+            <button type="submit" class="btn btn--primary form-submit" disabled>
+              Отправить заявку
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 

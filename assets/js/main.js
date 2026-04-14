@@ -127,7 +127,11 @@
     }
     modal.classList.add("is-open");
     document.body.classList.add("modal-open");
-    var first = modal.querySelector("input, select, textarea, button");
+    var first =
+      $("#cf-name") ||
+      modal.querySelector(
+        "#contact-form input, #contact-form select, #contact-form textarea"
+      );
     if (first) first.focus();
   }
 
