@@ -21,9 +21,12 @@
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
   --header-inner-h: 72px;
   --header-h: calc(var(--header-inner-h) + env(safe-area-inset-top, 0px));
-  --container: min(1120px, calc(100% - 2.5rem));
-  --container-gutter: clamp(1.25rem, 4vw, 1.75rem);
-  --section-pad-y: clamp(2rem, 3.5vw, 3rem);
+  /* Плавные поля: без скачков на «типичных» ширинах */
+  --container-gutter: clamp(1rem, 3.2vw + 0.35rem, 2.25rem);
+  --container: min(1120px, calc(100% - (var(--container-gutter) * 2)));
+  --section-pad-y: clamp(1.5rem, 2.8vw + 0.75rem, 3rem);
+  /* Резерв под текст + кнопки в моб. герое (подбор max-height фото) */
+  --hero-chrome: clamp(8rem, 5rem + 20svmin, 16.5rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -35,13 +38,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + 0.35rem);
-}
-
-@media (max-width: 639px) {
-  html {
-    scroll-padding-top: calc(var(--header-h) + 0.25rem);
-  }
+  scroll-padding-top: calc(
+    var(--header-h) + clamp(0.2rem, 0.6vw + 0.1rem, 0.4rem)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -61,7 +60,7 @@ body {
   position: relative;
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.0625rem);
   line-height: 1.65;
   color: var(--color-text);
   background: var(--color-bg);
@@ -131,7 +130,7 @@ a:hover {
   font-weight: 500;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.2;
-  margin: 0 0 1rem;
+  margin: 0 0 clamp(0.65rem, 1.5vw, 1rem);
   color: var(--color-text);
 }
 
@@ -139,7 +138,7 @@ a:hover {
   margin: 0;
   max-width: 42rem;
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: clamp(0.98rem, 0.95rem + 0.35vw, 1.05rem);
 }
 
 .section__title--center {
@@ -151,46 +150,6 @@ a:hover {
   text-align: center;
   margin-inline: auto;
   max-width: 40rem;
-}
-
-@media (max-width: 639px) {
-  :root {
-    --container: min(1120px, calc(100% - 1.25rem));
-    --section-pad-y: clamp(1.5rem, 4vw, 2.25rem);
-  }
-
-  .section__title {
-    margin-bottom: 0.65rem;
-  }
-
-  .services__note {
-    margin-top: 1.25rem;
-    padding: 1rem 1rem;
-  }
-
-  .card {
-    padding: 1.25rem 1.1rem;
-  }
-
-  .lesson-panel {
-    padding: 1.25rem 1.1rem;
-  }
-
-  .about__grid {
-    gap: 1.5rem;
-  }
-
-  .contacts__grid {
-    gap: 1.35rem;
-  }
-
-  .faq-list {
-    gap: 0.5rem;
-  }
-
-  .edu-carousel__controls {
-    margin-top: 0.85rem;
-  }
 }
 
 .visually-hidden {
@@ -241,7 +200,7 @@ a:hover {
 .site-logo {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.15rem;
+  font-size: clamp(1.02rem, 0.95rem + 0.45vw, 1.15rem);
   color: var(--color-text);
   text-decoration: none;
   line-height: 1.25;
@@ -287,9 +246,10 @@ a:hover {
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 0.82rem + 0.35vw, 0.95rem);
   font-weight: 600;
-  padding: 0.65rem 1.35rem;
+  padding: clamp(0.55rem, 0.45rem + 0.45vw, 0.65rem)
+    clamp(1rem, 0.75rem + 1vw, 1.35rem);
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -572,17 +532,12 @@ a:hover {
 }
 
 @media (max-width: 899px) {
-  :root {
-    --container-gutter: clamp(1.35rem, 5vw, 2rem);
-    --container: min(
-      1120px,
-      calc(100% - (var(--container-gutter) * 2))
-    );
-  }
-
+  /* Явная высота = окно минус шапка: иначе % и max-height:100% у img не срабатывают, кнопки уезжают */
   .hero {
     min-height: calc(100vh - var(--header-h));
+    height: calc(100vh - var(--header-h));
     min-height: calc(100svh - var(--header-h));
+    height: calc(100svh - var(--header-h));
     padding-top: clamp(0.35rem, 1.5vmin, 0.75rem);
     padding-bottom: 0;
     padding-inline: max(0px, env(safe-area-inset-left, 0px))
@@ -591,11 +546,13 @@ a:hover {
     flex-direction: column;
     align-items: stretch;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   @supports (height: 100dvh) {
     .hero {
       min-height: calc(100dvh - var(--header-h));
+      height: calc(100dvh - var(--header-h));
     }
   }
 
@@ -606,6 +563,8 @@ a:hover {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
     align-self: center;
   }
 
@@ -614,9 +573,10 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: clamp(0.75rem, 3vmin, 1.25rem);
+    gap: clamp(0.5rem, 2vmin, 0.9rem);
     width: 100%;
     min-height: 0;
+    overflow: hidden;
     isolation: isolate;
   }
 
@@ -628,35 +588,42 @@ a:hover {
   }
 
   .hero__title {
-    font-size: clamp(1.45rem, 4.8vmin, 2.1rem);
-    margin-bottom: clamp(0.4rem, 1.6vmin, 0.9rem);
+    font-size: clamp(1.42rem, 0.9vw + 3.8vmin, 2.4rem);
+    margin-bottom: clamp(0.4rem, 1.5vmin, 1rem);
     line-height: 1.18;
   }
 
   .hero__lead {
-    font-size: clamp(0.96rem, 2.85vmin, 1.1rem);
+    font-size: clamp(0.94rem, 0.35vw + 2.6vmin, 1.22rem);
     line-height: 1.55;
-    margin-bottom: clamp(0.85rem, 3.5vmin, 1.35rem);
+    margin-bottom: clamp(0.35rem, 1.5vmin, 0.75rem);
   }
 
+  /* Занимает всё место между текстом и низом сетки — фото внутри масштабируется по высоте */
   .hero__middle {
     flex: 1 1 0%;
     min-height: 0;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 0;
-    /* отступ сверху в потоке — подложка ::before не «лезет» под текст */
-    padding-block: clamp(0.35rem, 1.5vmin, 0.65rem) clamp(0.5rem, 2vmin, 0.85rem);
+    padding-block: clamp(0.2rem, 1vmin, 0.45rem);
   }
 
   .hero__visual {
-    flex-shrink: 0;
-    max-width: min(100%, min(92vw, 400px));
-    margin-inline: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
     width: 100%;
-    display: block;
+    max-width: min(100%, min(94vw, 88vmin, 560px));
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     z-index: 0;
   }
@@ -681,14 +648,16 @@ a:hover {
     pointer-events: none;
   }
 
+  /* Родители с min-height:0 + overflow:hidden дают реальный предел для 100% */
   .hero__img {
-    width: 100%;
-    max-width: min(92vw, 400px);
+    display: block;
+    width: auto;
+    max-width: 100%;
     height: auto;
+    max-height: 100%;
     margin-inline: auto;
-    aspect-ratio: 4 / 5;
-    max-height: min(56vh, 500px);
-    object-fit: cover;
+    flex-shrink: 1;
+    object-fit: contain;
     object-position: center center;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -710,52 +679,22 @@ a:hover {
     gap: clamp(0.4rem, 1.5vmin, 0.65rem);
     width: 100%;
     margin-top: auto;
-    padding-top: clamp(0.65rem, 2.5vmin, 1.1rem);
+    padding-top: clamp(0.45rem, 2vmin, 0.85rem);
     padding-bottom: max(0.85rem, calc(env(safe-area-inset-bottom, 0px) + 0.35rem));
     position: relative;
-    z-index: 2;
+    z-index: 5;
     background: var(--color-bg);
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .hero__actions--mobile .btn {
-    padding: 0.55rem 1.1rem;
-    font-size: clamp(0.82rem, 2.6vmin, 0.95rem);
-  }
-}
-
-/* Планшет в рамках «мобильного» героя: крупнее текст и фото (десктоп ≥900px не затрагивается) */
-@media (max-width: 899px) and (min-width: 600px) {
-  .hero__title {
-    font-size: clamp(1.85rem, 3.4vw, 2.45rem);
-    margin-bottom: clamp(0.5rem, 1.8vmin, 1rem);
-    line-height: 1.16;
-  }
-
-  .hero__lead {
-    font-size: clamp(1.05rem, 2vw, 1.22rem);
-    line-height: 1.58;
-  }
-
-  .hero__visual {
-    max-width: min(100%, min(86vw, 540px));
-  }
-
-  .hero__visual::before {
-    top: -0.55rem;
-    right: -0.5rem;
-    bottom: -0.6rem;
-    left: -0.5rem;
-    border-radius: calc(var(--radius-lg) + 6px);
-  }
-
-  .hero__img {
-    max-width: min(86vw, 540px);
-    max-height: min(64vh, 620px);
-  }
-
-  .hero__actions--mobile .btn {
-    padding: 0.65rem 1.25rem;
-    font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+    padding: clamp(0.5rem, 0.8vmin + 0.35rem, 0.65rem)
+      clamp(0.95rem, 1.5vw + 0.5rem, 1.25rem);
+    font-size: clamp(0.8rem, 0.4vw + 2.4vmin, 1.05rem);
+    touch-action: manipulation;
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -789,26 +728,25 @@ a:hover {
 
 .services__grid {
   display: grid;
-  gap: 1.5rem;
-}
-
-@media (min-width: 700px) {
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 17.5rem), 1fr)
+  );
 }
 
 .card {
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 1.75rem 1.5rem;
+  padding: clamp(1.2rem, 2.5vw + 0.5rem, 1.75rem)
+    clamp(1.1rem, 2.2vw + 0.4rem, 1.5rem);
   box-shadow: var(--shadow-sm);
 }
 
 .card__title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: clamp(1.08rem, 1rem + 0.45vw, 1.25rem);
   margin: 0 0 1rem;
 }
 
@@ -827,8 +765,9 @@ a:hover {
 }
 
 .services__note {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1rem, 2.2vw + 0.5rem, 1.25rem)
+    clamp(1rem, 2.5vw, 1.5rem);
   background: var(--color-accent-soft);
   border-radius: var(--radius-md);
   border: 1px solid rgba(30, 95, 95, 0.15);
@@ -846,19 +785,17 @@ a:hover {
 
 .lesson-panels {
   display: grid;
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .lesson-panels {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 19rem), 1fr)
+  );
 }
 
 .lesson-panel {
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
-  padding: 1.75rem;
+  padding: clamp(1.2rem, 2.5vw + 0.5rem, 1.75rem);
   border: 1px solid var(--color-border);
 }
 
@@ -879,20 +816,18 @@ a:hover {
 
 .pricing__grid {
   display: grid;
-  gap: 1rem;
-}
-
-@media (min-width: 768px) {
-  .pricing__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 15.5rem), 1fr)
+  );
 }
 
 .price-card {
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
-  padding: 1.75rem 1.5rem;
+  padding: clamp(1.15rem, 2.2vw + 0.45rem, 1.75rem)
+    clamp(1.1rem, 2vw + 0.4rem, 1.5rem);
   border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
@@ -916,12 +851,6 @@ label.price-card {
 .price-card--selectable:focus-within {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-}
-
-@media (max-width: 639px) {
-  .price-card {
-    padding: 1.2rem 1.1rem;
-  }
 }
 
 .price-card__type {
@@ -983,15 +912,11 @@ label.price-card {
 
 .reviews-carousel__slide .reviews__grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 900px) {
-  .reviews-carousel__slide .reviews__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 15.5rem), 1fr)
+  );
 }
 
 .reviews-carousel__controls {
@@ -1030,17 +955,11 @@ label.price-card {
 .review {
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: clamp(1rem, 2vw + 0.35rem, 1.25rem);
   border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   min-height: 0;
-}
-
-@media (max-width: 639px) {
-  .review {
-    padding: 1.05rem 1rem;
-  }
 }
 
 .review__author {
@@ -1126,7 +1045,7 @@ label.price-card {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: clamp(0.85rem, 2vw, 1rem);
 }
 
 .edu-carousel__btn {
@@ -1163,7 +1082,7 @@ label.price-card {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
 }
 
 .faq-item {
@@ -1174,9 +1093,10 @@ label.price-card {
 }
 
 .faq-item summary {
-  padding: 1.1rem 1.25rem;
+  padding: clamp(0.95rem, 2vw + 0.35rem, 1.1rem)
+    clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.94rem, 0.88rem + 0.35vw, 1rem);
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -1202,9 +1122,9 @@ label.price-card {
 }
 
 .faq-item__body {
-  padding: 0 1.25rem 1.15rem;
+  padding: 0 clamp(1rem, 2.5vw, 1.25rem) clamp(1rem, 2vw, 1.15rem);
   color: var(--color-text-muted);
-  font-size: 0.98rem;
+  font-size: clamp(0.92rem, 0.88rem + 0.25vw, 0.98rem);
 }
 
 .faq-item__body p {
@@ -1215,27 +1135,49 @@ label.price-card {
    Contacts & footer
    ----------------------------------------------------------------------------- */
 
-.contacts__grid {
-  display: grid;
-  gap: 2rem;
+#contacts > .container {
+  container-type: inline-size;
+  container-name: contacts;
 }
 
-.contacts__cta {
+.contacts__grid {
+  display: grid;
+  gap: clamp(1.35rem, 3.5vw, 2rem);
+}
+
+.contacts__intro-title,
+.contacts__intro-lead {
   text-align: center;
 }
 
-@media (max-width: 767px) {
-  .contacts__intro-title,
-  .contacts__intro-lead {
-    text-align: center;
-  }
-}
-
-@media (min-width: 768px) {
+@container contacts (min-width: 42rem) {
   .contacts__grid {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
+
+  .contacts__intro-title,
+  .contacts__intro-lead {
+    text-align: left;
+  }
+}
+
+@supports not (container-type: inline-size) {
+  @media (min-width: 48rem) {
+    .contacts__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    .contacts__intro-title,
+    .contacts__intro-lead {
+      text-align: left;
+    }
+  }
+}
+
+.contacts__cta {
+  text-align: center;
 }
 
 .contact-list {
@@ -1266,7 +1208,7 @@ label.price-card {
 .site-footer {
   background: #1a1f1e;
   color: rgba(255, 255, 255, 0.78);
-  padding: 2.5rem 0;
+  padding: clamp(1.75rem, 4vw, 2.5rem) 0;
   margin-top: 0;
 }
 
@@ -1279,7 +1221,7 @@ label.price-card {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1.1rem, 3vw, 1.5rem);
   align-items: center;
   text-align: center;
 }
