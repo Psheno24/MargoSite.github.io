@@ -29,19 +29,34 @@
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
 
-  /* Моб. герой: фиксируем высоту окна при загрузке (как в main.css max-width: 899px),
-     чтобы при скрытии/показе адресной строки layout не пересчитывался. Обновляем
-     при смене ширины брейкпоинта и после поворота экрана. */
+  /* Моб. герой: --hero-viewport-h и явная высота .hero в px (окно минус .site-header),
+     чтобы при скрытии/показе адресной строки блок не пересчитывался. Обновляем при
+     смене брейкпоинта и после поворота экрана. */
   var heroViewportMql = window.matchMedia("(max-width: 899px)");
   function syncHeroViewportHeight() {
+    var hero = document.querySelector(".hero");
     if (!heroViewportMql.matches) {
       document.documentElement.style.removeProperty("--hero-viewport-h");
+      if (hero) {
+        hero.style.minHeight = "";
+        hero.style.height = "";
+      }
       return;
     }
+    var innerH = window.innerHeight;
     document.documentElement.style.setProperty(
       "--hero-viewport-h",
-      window.innerHeight + "px"
+      innerH + "px"
     );
+    if (!hero) return;
+    var header = document.querySelector(".site-header");
+    var hh = header ? Math.round(header.getBoundingClientRect().height) : 0;
+    if (!hh) {
+      hh = 72;
+    }
+    var band = Math.max(0, Math.round(innerH) - hh);
+    hero.style.minHeight = band + "px";
+    hero.style.height = band + "px";
   }
   syncHeroViewportHeight();
   if (heroViewportMql.addEventListener) {
